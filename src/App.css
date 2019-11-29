@@ -1,0 +1,88 @@
+div.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  padding: 10px;
+  width: 600px;
+}
+
+div.table {
+  width: 522px;
+  display: flex;
+  flex-flow: wrap;
+}
+
+div.tile {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.tile-gray {
+  background-color: #acacac;
+}
+
+div.tile-white {
+  background-color: white;
+}
+
+div.player {
+  display: flex;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  align-items: center;
+  border-radius: 50%;
+}
+
+div.player.black {
+  background-color: black;
+}
+
+div.player.white {
+  background-color: white;
+}
+
+div.selected {
+  border: 3px solid red;
+}
+
+div.unselected {
+  border: none;
+}
+
+div.turnOff {
+  display: none;
+}
+
+div.buttons {
+  padding-top: 10px;
+}
+
+button.button {
+  margin: 0px 5px 0px 5px;
+}
+
+div.whoPlay {
+  padding: 5px 0px 5px 0px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+div.counterWinsBar {
+  font-size: 20px;
+  font-weight: bold;
+}
