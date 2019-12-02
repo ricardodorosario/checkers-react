@@ -1,9 +1,9 @@
 [![version](https://img.shields.io/github/package-json/v/ricardodorosario/checkers-react?style=flat-square)](https://github.com/ricardodorosario/checkers-react)
 
-# react-checkers
+## checkers-react
 
-Checkers made in React
+An example of checkers game using React
 
-# Game is running in
+![Checkers Screen](https://github.com/ricardodorosario/checkers-react/images/checkers-react-screen.png)
 
-[games.pokolegas.com.br](https://games.pokolegas.com.br/checkers/)
+## Game is running in [games.pokolegas.com.br](https://games.pokolegas.com.br/checkers/)
