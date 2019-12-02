@@ -1,23 +1,63 @@
+//
+export function init(component) {
+  const table = [];
+  let tileGray = "true";
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
+      const tile = {
+        position: { y: y, x: x },
+        playerColor: "",
+        selected: false
+      };
+      if (
+        ((y === 0 || y === 2) && x % 2 === 0) ||
+        ((y === 1 || y === 3) && (x + 1) % 2 === 0)
+      ) {
+        Object.assign(tile, { playerColor: "black" });
+      }
+      if (
+        ((y === 6 || y === 8) && x % 2 === 0) ||
+        ((y === 7 || y === 9) && (x + 1) % 2 === 0)
+      ) {
+        Object.assign(tile, { playerColor: "white" });
+      }
+      Object.assign(tile, {
+        tileColor: tileGray ? "tile-gray" : "tile-white"
+      });
+      table[`i${y}${x}`] = tile;
+      tileGray = !tileGray;
+    }
+    tileGray = !tileGray;
+  }
+  component.setState(state => ({
+    ...state,
+    table
+  }));
+}
+//
 function canISelect(component, id) {
   const { table, whoPlay, tileSelected } = component.state;
-  const tileWasSelected = table[id].selected;
-  const tilePlayerColor = table[id].playerColor;
+  if (!table[`i${id}`]) {
+    return false;
+  }
+  const tileWasSelected = table[`i${id}`].selected;
+  const tilePlayerColor = table[`i${id}`].playerColor;
   if (whoPlay === tilePlayerColor && !tileWasSelected && !tileSelected) {
     return true;
   }
   return false;
 }
-
+//
 function select(component, tileClicked, id) {
   const { table } = component.state;
-  Object.assign(table[id], { selected: true });
+  Object.assign(table[`i${id}`], { selected: true });
   component.setState(state => ({
     ...state,
     table,
     tileSelected: tileClicked
   }));
 }
-
+//
 function canIUnselect(component, id) {
   const {
     table,
@@ -25,8 +65,8 @@ function canIUnselect(component, id) {
     tileSelected,
     nexMoveInAnyDirection
   } = component.state;
-  const tileWasSelected = table[id].selected;
-  const tilePlayerColor = table[id].playerColor;
+  const tileWasSelected = table[`i${id}`].selected;
+  const tilePlayerColor = table[`i${id}`].playerColor;
   if (
     whoPlay === tilePlayerColor &&
     tileWasSelected &&
@@ -37,17 +77,17 @@ function canIUnselect(component, id) {
   }
   return false;
 }
-
+//
 function unselect(component, id) {
   const { table } = component.state;
-  Object.assign(table[id], { selected: false });
+  Object.assign(table[`i${id}`], { selected: false });
   component.setState(state => ({
     ...state,
     table,
     tileSelected: null
   }));
 }
-
+//
 function canIMove(component, tileClicked, id) {
   const {
     table,
@@ -55,7 +95,7 @@ function canIMove(component, tileClicked, id) {
     tileSelected,
     nexMoveInAnyDirection
   } = component.state;
-  const tilePlayerColor = table[id].playerColor;
+  const tilePlayerColor = table[`i${id}`].playerColor;
   if (!tileSelected || nexMoveInAnyDirection) {
     return false;
   }
@@ -89,19 +129,19 @@ function canIMove(component, tileClicked, id) {
     ) && tilePlayerColor === ""
   );
 }
-
+//
 function move(component, id) {
   const { table, tileSelected, whoPlay } = component.state;
-  Object.assign(table[`${tileSelected.y}${tileSelected.x}`], {
+  Object.assign(table[`i${tileSelected.y}${tileSelected.x}`], {
     playerColor: ""
   });
-  Object.assign(table[id], { playerColor: whoPlay });
+  Object.assign(table[`i${id}`], { playerColor: whoPlay });
   component.setState(state => ({
     ...state,
     table
   }));
 }
-
+//
 function changePlayer(component) {
   const { whoPlay } = component.state;
   component.setState(state => ({
@@ -109,7 +149,7 @@ function changePlayer(component) {
     whoPlay: whoPlay === "black" ? "white" : "black"
   }));
 }
-
+//
 function canITakeAPiece(component, tileClicked, id) {
   const {
     table,
@@ -117,7 +157,7 @@ function canITakeAPiece(component, tileClicked, id) {
     whoPlay,
     nexMoveInAnyDirection
   } = component.state;
-  const tilePlayerColor = table[id].playerColor;
+  const tilePlayerColor = table[`i${id}`].playerColor;
   if (!tileSelected) {
     return false;
   }
@@ -155,69 +195,50 @@ function canITakeAPiece(component, tileClicked, id) {
     tilePlayerColor === ""
   );
 }
-
+//
 function canITakeAPieceAnyDirection(component, tileClicked) {
   const { table } = component.state;
-  let idOpponent;
-  idOpponent = takeIdIfHasOpponent(component, tileClicked, {
-    y: `${parseInt(tileClicked.y, 10) + 2}`,
-    x: `${parseInt(tileClicked.x, 10) + 2}`
+  let canTake = false;
+  const possibleMoves = [
+    { y: 2, x: 2 },
+    { y: 2, x: -2 },
+    { y: -2, x: 2 },
+    { y: -2, x: -2 }
+  ];
+  possibleMoves.forEach(move => {
+    const idOpponent = takeIdIfHasOpponent(component, tileClicked, {
+      y: `${parseInt(tileClicked.y, 10) + move.y}`,
+      x: `${parseInt(tileClicked.x, 10) + move.x}`
+    });
+    if (idOpponent) {
+      const possibleMove =
+        table[
+          `i${parseInt(tileClicked.y, 10) + move.y}${parseInt(
+            tileClicked.x,
+            10
+          ) + move.x}`
+        ];
+      if (possibleMove && possibleMove.playerColor === "") {
+        canTake = true;
+        return;
+      }
+    }
   });
-  if (idOpponent) {
-    return (
-      table[
-        `${parseInt(tileClicked.y, 10) + 2}${parseInt(tileClicked.x, 10) + 2}`
-      ].playerColor === ""
-    );
-  }
-  idOpponent = takeIdIfHasOpponent(component, tileClicked, {
-    y: `${parseInt(tileClicked.y, 10) + 2}`,
-    x: `${parseInt(tileClicked.x, 10) - 2}`
-  });
-  if (idOpponent) {
-    return (
-      table[
-        `${parseInt(tileClicked.y, 10) + 2}${parseInt(tileClicked.x, 10) - 2}`
-      ].playerColor === ""
-    );
-  }
-  idOpponent = takeIdIfHasOpponent(component, tileClicked, {
-    y: `${parseInt(tileClicked.y, 10) - 2}`,
-    x: `${parseInt(tileClicked.x, 10) + 2}`
-  });
-  if (idOpponent) {
-    return (
-      table[
-        `${parseInt(tileClicked.y, 10) - 2}${parseInt(tileClicked.x, 10) + 2}`
-      ].playerColor === ""
-    );
-  }
-  idOpponent = takeIdIfHasOpponent(component, tileClicked, {
-    y: `${parseInt(tileClicked.y, 10) - 2}`,
-    x: `${parseInt(tileClicked.x, 10) - 2}`
-  });
-  if (idOpponent) {
-    return (
-      table[
-        `${parseInt(tileClicked.y, 10) - 2}${parseInt(tileClicked.x, 10) - 2}`
-      ].playerColor === ""
-    );
-  }
-  return false;
+  return canTake;
 }
-
+//
 function takeIdIfHasOpponent(component, tileSelected, tileClicked) {
   const { table, whoPlay } = component.state;
   const sumY = (parseInt(tileSelected.y, 10) + parseInt(tileClicked.y, 10)) / 2;
   const sumX = (parseInt(tileSelected.x, 10) + parseInt(tileClicked.x, 10)) / 2;
   const idOpponent = `${sumY}${sumX}`;
-  return table[idOpponent] &&
-    table[idOpponent].playerColor !== whoPlay &&
-    table[idOpponent].playerColor !== ""
+  return table[`i${idOpponent}`] &&
+    table[`i${idOpponent}`].playerColor !== whoPlay &&
+    table[`i${idOpponent}`].playerColor !== ""
     ? idOpponent
     : null;
 }
-
+//
 function takePiece(component, tileClicked) {
   const {
     table,
@@ -227,7 +248,7 @@ function takePiece(component, tileClicked) {
     tileSelected
   } = component.state;
   const idOpponent = takeIdIfHasOpponent(component, tileSelected, tileClicked);
-  Object.assign(table[idOpponent], { playerColor: "" });
+  Object.assign(table[`i${idOpponent}`], { playerColor: "" });
   component.setState(state => ({
     ...state,
     table,
@@ -235,14 +256,14 @@ function takePiece(component, tileClicked) {
     whitePieces: whoPlay === "white" ? whitePieces : whitePieces - 1
   }));
 }
-
+//
 function setNextMoveInAnyDirection(component, canIMove) {
   component.setState(state => ({
     ...state,
     nexMoveInAnyDirection: canIMove
   }));
 }
-
+//
 export function onClick(component, a) {
   const { tileSelected } = component.state;
   const id = a.currentTarget.id;
@@ -250,29 +271,23 @@ export function onClick(component, a) {
     y: a.currentTarget.getAttribute("y"),
     x: a.currentTarget.getAttribute("x")
   };
-  //console.log(a.currentTarget);
   if (canISelect(component, id)) {
-    console.log("I can select");
     select(component, tileClicked, id);
   } else {
     if (canIUnselect(component, id)) {
-      console.log("I can unselect");
       unselect(component, id);
     } else {
       if (canIMove(component, tileClicked, id)) {
-        console.log("I can move");
         move(component, id);
         unselect(component, `${tileSelected.y}${tileSelected.x}`);
         changePlayer(component, id);
       } else {
         if (canITakeAPiece(component, tileClicked, id)) {
-          console.log("I can take a piece");
           takePiece(component, tileClicked);
           move(component, id);
           setNextMoveInAnyDirection(component, false);
           unselect(component, `${tileSelected.y}${tileSelected.x}`);
           if (canITakeAPieceAnyDirection(component, tileClicked)) {
-            console.log("I can take a piece in any direction");
             select(component, tileClicked, id);
             setNextMoveInAnyDirection(component, true);
           } else {
@@ -282,4 +297,16 @@ export function onClick(component, a) {
       }
     }
   }
+}
+//
+export function restart(component) {
+  init(component);
+  component.setState(state => ({
+    ...state,
+    whoPlay: "black",
+    tileSelected: null,
+    blackPieces: 20,
+    whitePieces: 20,
+    nexMoveInAnyDirection: false
+  }));
 }
