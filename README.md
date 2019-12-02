@@ -1,6 +1,6 @@
 # react-checkers
 
-Checkers made with React
+Checkers made in React
 
 # Game is running in
 

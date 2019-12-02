@@ -10,20 +10,24 @@ class Table extends React.Component {
     const { table, onClick } = this.props;
     const tiles = [];
     let tileGray = true;
-    table.forEach(tile => {
-      tiles.push(
+    if (!table["i00"]) {
+      return null;
+    }
+    for (let i = 0; i < 100; i++) {
+      const index = i < 10 ? `i0${i}` : `i${i}`;
+      tiles[i] = (
         <Tile
-          key={`${tile.position.y}${tile.position.x}`}
+          key={`${table[index].position.y}${table[index].position.x}`}
           onClick={onClick}
-          tile={tile}
+          tile={table[index]}
         />
       );
 
       tileGray = !tileGray;
-      if ((tile.position + 1) % 10 === 0) {
+      if ((table[index].position.y + 1) % 10 === 0) {
         tileGray = !tileGray;
       }
-    });
+    }
     return <div className="table">{tiles}</div>;
   }
 }
