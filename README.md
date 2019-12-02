@@ -4,6 +4,6 @@
 
 An example of checkers game using React
 
-![Image Checkers Screen](https://github.com/ricardodorosario/checkers-react/images/checkers-react-screen.png)
+![Checkers Screen](https://github.com/ricardodorosario/checkers-react/blob/master/images/checkers-react-screen.png)
 
 ## Game is running in [games.pokolegas.com.br](https://games.pokolegas.com.br/checkers/)
