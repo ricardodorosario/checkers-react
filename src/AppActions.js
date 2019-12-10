@@ -2,8 +2,8 @@
 export function init(component) {
   const table = [];
   let tileGray = "true";
-  for (let y = 0; y < 10; y++) {
-    for (let x = 0; x < 10; x++) {
+  for (let y = 0; y < 8; y++) {
+    for (let x = 0; x < 8; x++) {
       const tile = {
         position: { y: y, x: x },
         playerColor: "",
@@ -11,13 +11,13 @@ export function init(component) {
       };
       if (
         ((y === 0 || y === 2) && x % 2 === 0) ||
-        ((y === 1 || y === 3) && (x + 1) % 2 === 0)
+        (y === 1 && (x + 1) % 2 === 0)
       ) {
         Object.assign(tile, { playerColor: "black" });
       }
       if (
-        ((y === 6 || y === 8) && x % 2 === 0) ||
-        ((y === 7 || y === 9) && (x + 1) % 2 === 0)
+        (y === 6 && x % 2 === 0) ||
+        ((y === 5 || y === 7) && (x + 1) % 2 === 0)
       ) {
         Object.assign(tile, { playerColor: "white" });
       }

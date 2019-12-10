@@ -10,8 +10,8 @@ class App extends React.Component {
       table: [],
       whoPlay: "black",
       tileSelected: null,
-      blackPieces: 20,
-      whitePieces: 20,
+      blackPieces: 12,
+      whitePieces: 12,
       nexMoveInAnyDirection: false
     };
   }

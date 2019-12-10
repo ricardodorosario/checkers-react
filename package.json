@@ -1,6 +1,6 @@
 {
   "name": "react-checkers",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Checkers made in React",
   "keywords": [
     "react-checkers",
@@ -32,7 +32,8 @@
     "babel-loader": "^8.0.6",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
-    "react-horizontal-stacked-bar-chart": "8.13.2"
+    "react-horizontal-stacked-bar-chart": "8.13.2",
+    "eslint": "~6.7.2"
   },
   "browserslist": {
     "production": [
