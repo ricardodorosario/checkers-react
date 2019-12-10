@@ -21,15 +21,15 @@ class PiecesCounterBar extends React.Component {
           showTextUp
           data={[
             {
-              name: "Black pieces",
+              name: blackPieces != 0 ? "Black pieces" : "",
               value: valueBlack,
-              description: `${blackPieces}`,
+              description: blackPieces != 0 ? `${blackPieces}` : "",
               color: "rgb(80,80,80)"
             },
             {
-              name: "White pieces",
+              name: whitePieces != 0 ? "White pieces" : "",
               value: valueWhite,
-              description: `${whitePieces}`,
+              description: whitePieces != 0 ? `${whitePieces}` : "",
               color: "rgb(230,230,230)"
             }
           ]}

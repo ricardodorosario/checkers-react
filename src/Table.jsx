@@ -10,23 +10,21 @@ class Table extends React.Component {
     const { table, onClick } = this.props;
     const tiles = [];
     let tileGray = true;
-    if (!table["i00"]) {
+    if (!table.i00) {
       return null;
     }
-    for (let i = 0; i < 100; i++) {
-      const index = i < 10 ? `i0${i}` : `i${i}`;
-      tiles[i] = (
-        <Tile
-          key={`${table[index].position.y}${table[index].position.x}`}
-          onClick={onClick}
-          tile={table[index]}
-        />
-      );
 
-      tileGray = !tileGray;
-      if ((table[index].position.y + 1) % 10 === 0) {
+    for (let y = 0; y < 8; y++) {
+      for (let x = 0; x < 8; x++) {
+        const index = `i${y}${x}`;
+        const index2 = `${y + 1}${x}`;
+        tiles[index2] = (
+          <Tile key={index} onClick={onClick} tile={table[index]} />
+        );
+
         tileGray = !tileGray;
       }
+      tileGray = !tileGray;
     }
     return <div className="table">{tiles}</div>;
   }
