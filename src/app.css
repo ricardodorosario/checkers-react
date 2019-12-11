@@ -87,7 +87,7 @@ div.turnOff {
 
 div.buttons {
   padding: 5px 0px 5px 0px;
-  background-color: #555;
+  background-color: white;
   width: 100%;
   text-align: center;
   margin-top: 5px;
@@ -102,11 +102,25 @@ div.whoPlay {
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
-  background-color: #555;
   width: 100%;
   text-align: center;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+.menu-button {
+  background-color: white !important;
+  height: 80%;
+  min-width: 50px !important;
+  margin-left: 10px !important;
+}
+
+div.bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #555;
+  width: 100%;
 }
 
 div.piecesCounterBar {
@@ -130,4 +144,76 @@ div.footer {
 }
 div.footer > h4 {
   margin: 5px;
+}
+
+div.modal-shadow {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #555c;
+  top: 0px;
+  left: 0px;
+  justify-content: center;
+  align-items: center;
+}
+div.modal-shadow > div.modal {
+  display: flex;
+  background-color: white;
+  color: black;
+  width: 80%;
+  height: 80%;
+  flex-direction: column;
+  box-shadow: -5px 5px 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+div.modal-shadow > div.modal > div.modal-header {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: #efefef;
+  color: black;
+  font-size: 14pt;
+  font-weight: bold;
+  padding: 0px 10px 0px 10px;
+  box-shadow: 0px 0px 8px;
+  z-index: 1;
+}
+
+div.modal-shadow > div.modal > div.modal-body {
+  height: calc(100% - 90px);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px;
+}
+div.modal-shadow > div.modal > div.modal-footer {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #efefef;
+  padding: 0px 10px 0px 10px;
+  box-shadow: 0px 0px 8px;
+  z-index: 1;
+}
+
+div.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+div.modal-shadow > div.modal > div.modal-footer > button {
+  height: 80%;
+  min-width: 80px;
+}
+
+span.switch-black-starts > span.Mui-checked {
+  color: #282c34 !important;
+}
+span.switch-black-starts > span.MuiSwitch-track {
+  background-color: #555 !important;
 }

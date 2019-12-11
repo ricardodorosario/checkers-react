@@ -1,18 +1,23 @@
 import React from "react";
+import MenuIcon from "@material-ui/icons/Menu";
+import Button from "@material-ui/core/Button";
 import Table from "./Table";
 import PiecesCounterBar from "./PiecesCounterBar";
 import * as appActions from "./AppActions";
+import Settings from "./Settings";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       table: [],
+      blackStarts: true,
       whoPlay: "black",
       tileSelected: null,
       blackPieces: 12,
       whitePieces: 12,
-      nexMoveInAnyDirection: false
+      nexMoveInAnyDirection: false,
+      showMenu: false
     };
   }
 
@@ -25,12 +30,26 @@ class App extends React.Component {
     return (
       <div className="app">
         <PiecesCounterBar blackPieces={blackPieces} whitePieces={whitePieces} />
-        <div className="whoPlay">{whoPlay} plays</div>
+        <div className="bar">
+          <Button
+            className="menu-button"
+            color="primary"
+            onClick={() => appActions.showMenu(this, true)}
+            size="small"
+          >
+            <MenuIcon size="small" />
+          </Button>
+          <div className="whoPlay">{whoPlay} plays</div>
+        </div>
         <Table table={table} onClick={evt => appActions.onClick(this, evt)} />
         <div className="buttons">
-          <button className="button" onClick={() => appActions.restart(this)}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => appActions.restart(this)}
+          >
             Restart Game
-          </button>
+          </Button>
         </div>
         <div className="footer">
           <h4>Contribute:</h4>
@@ -43,6 +62,7 @@ class App extends React.Component {
             </a>
           </div>
         </div>
+        {this.state.showMenu && <Settings component={this} />}
       </div>
     );
   }
