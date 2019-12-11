@@ -303,10 +303,17 @@ export function restart(component) {
   init(component);
   component.setState(state => ({
     ...state,
-    whoPlay: "black",
+    whoPlay: component.state.blackStarts ? "black" : "white",
     tileSelected: null,
-    blackPieces: 20,
-    whitePieces: 20,
+    blackPieces: 12,
+    whitePieces: 12,
     nexMoveInAnyDirection: false
+  }));
+}
+//
+export function showMenu(component, showMenu) {
+  component.setState(state => ({
+    ...state,
+    showMenu
   }));
 }
