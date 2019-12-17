@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 class Tile extends React.Component {
   constructor(props) {
@@ -19,7 +21,9 @@ class Tile extends React.Component {
           className={`player ${tile.playerColor} ${
             tile.selected ? "selected" : "unselected"
           }`}
-        ></div>
+        >
+          {tile.king ? <FontAwesomeIcon icon={faCrown} /> : ""}
+        </div>
       </div>
     );
   }

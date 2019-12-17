@@ -9,22 +9,16 @@ class Table extends React.Component {
   render() {
     const { table, onClick } = this.props;
     const tiles = [];
-    let tileGray = true;
-    if (!table.i00) {
+    if (!table[0]) {
       return null;
     }
 
     for (let y = 0; y < 8; y++) {
       for (let x = 0; x < 8; x++) {
-        const index = `i${y}${x}`;
-        const index2 = `${y + 1}${x}`;
-        tiles[index2] = (
-          <Tile key={index} onClick={onClick} tile={table[index]} />
+        tiles.push(
+          <Tile key={`idx_${y}${x}`} onClick={onClick} tile={table[y][x]} />
         );
-
-        tileGray = !tileGray;
       }
-      tileGray = !tileGray;
     }
     return <div className="table">{tiles}</div>;
   }
