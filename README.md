@@ -6,7 +6,7 @@ An example of checkers game using React
 
 ![Checkers Screen](https://github.com/ricardodorosario/checkers-react/blob/master/images/checkers-react-screen.png)
 
-## Rules
+## Rules test
 
 1. Each player starts with 12 pieces of the three rows closest to that player's side.
 1. Moves are allowed only on the dark squares, so pieces always move diagonally.
