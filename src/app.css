@@ -109,11 +109,8 @@ div.whoPlay {
   margin-top: 5px;
 }
 
-.menu-button {
-  background-color: white !important;
-  height: 80%;
-  min-width: 50px !important;
-  margin-left: 10px !important;
+label.whoStartPlaying {
+  padding-left: 5px;
 }
 
 div.bar {
@@ -159,6 +156,7 @@ div.modal-shadow {
   align-items: center;
 }
 div.modal-shadow > div.modal {
+  position: relative;
   display: flex;
   background-color: white;
   color: black;
@@ -188,10 +186,9 @@ div.modal-shadow > div.modal > div.modal-body {
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 10px;
 }
 div.modal-shadow > div.modal > div.modal-footer {
-  height: 40px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -199,17 +196,6 @@ div.modal-shadow > div.modal > div.modal-footer {
   padding: 0px 10px 0px 10px;
   box-shadow: 0px 0px 8px;
   z-index: 1;
-}
-
-div.row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-div.modal-shadow > div.modal > div.modal-footer > button {
-  height: 80%;
-  min-width: 80px;
 }
 
 span.switch-black-starts > span.Mui-checked {

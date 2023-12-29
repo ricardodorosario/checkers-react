@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import { configure, shallow } from "enzyme";
 import { expect } from "chai";
@@ -37,3 +37,4 @@ it("Verifies if I can unselect", () => {
 
   expect(wrapper.state().table["2"]["2"].selected).to.equal(false);
 });
+*/

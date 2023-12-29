@@ -7,7 +7,7 @@ class Modal extends React.Component {
   }
   render() {
     return (
-      <div className="modal-shadow">
+      <div className="modal-shadow" centered>
         <div className="modal">
           <div className="modal-header">{this.props.header}</div>
           <div className="modal-body">{this.props.children}</div>

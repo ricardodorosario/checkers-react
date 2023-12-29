@@ -1,8 +1,7 @@
 import React from "react";
 import * as settingsActions from "./SettingsActions";
 import Modal from "./Modal";
-import Button from "@material-ui/core/Button";
-import { Switch, FormLabel } from "@material-ui/core";
+import { Button, FormCheck, FormLabel, Row } from "react-bootstrap";
 
 class Settings extends React.Component {
   constructor(props) {
@@ -13,8 +12,7 @@ class Settings extends React.Component {
   getFooter() {
     return (
       <Button
-        variant="contained"
-        color="primary"
+        variant="primary"
         onClick={() =>
           settingsActions.showSettings(this.props.component, false)
         }
@@ -25,23 +23,25 @@ class Settings extends React.Component {
   }
 
   render() {
-    console.log(this.props.component.state.blackStarts);
+    console.log("black starts", this.props.component.state.blackStarts);
     return (
       <Modal header={"Settings"} footer={this.getFooter()}>
-        <div className="row">
-          <FormLabel component="legend">Who starts:</FormLabel>
-        </div>
-        <div className="row">
-          <div>White</div>
-          <Switch
-            className="switch-black-starts"
-            checked={this.props.component.state.blackStarts}
-            onChange={event =>
+        <Row>
+          <FormLabel className="whoStartPlaying" component="legend">
+            Who starts:
+          </FormLabel>
+        </Row>
+        <Row>
+          <FormCheck
+            type="switch"
+            id="black-starts"
+            label="Black starts"
+            defaultChecked={this.props.component.state.blackStarts}
+            onChange={(event) =>
               settingsActions.setWhoStarts(this.props.component, event)
             }
           />
-          <div>Black</div>
-        </div>
+        </Row>
       </Modal>
     );
   }

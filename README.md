@@ -16,10 +16,10 @@ An example of checkers game using React
 1. Only one piece may be captured in a single jump.
 1. Multiple jumps are allowed during a single turn.
 1. When a piece is captured, it is removed from the board.
-1. If a player is able to make a capture, there is no option; the jump must be made. **(Not done yet)**.
-1. If more than one capture is available, the player is free to choose whichever he or she prefers. **(Not done yet)**.
+1. If a player is able to make a capture, there is no option; the jump must be made. **(TODO)**.
+1. If more than one capture is available, the player is free to choose whichever he or she prefers. **(TODO)**.
 1. When a piece reaches the furthest row from the player who controls that piece, it is crowned and becomes a king.
 1. Kings are able to moving diagonally both forward and backward.
-1. The game ends when all the opponent's pieces were captured or when in 10 turns, no one was captured. In this case, the player who have mores pieces wins. **(Not done yet)**.
+1. The game ends when all the opponent's pieces were captured or when in 10 turns, no one was captured. In this case, the player who have mores pieces wins. **(TODO)**.
 
 ## Game is running on [games.pokolegas.com.br](https://games.pokolegas.com.br/checkers/)

@@ -1,6 +1,6 @@
 import React from "react";
-import MenuIcon from "@material-ui/icons/Menu";
-import Button from "@material-ui/core/Button";
+import { List } from "react-bootstrap-icons";
+import { Button } from "react-bootstrap";
 import Table from "./Table";
 import PiecesCounterBar from "./PiecesCounterBar";
 import * as appActions from "./AppActions";
@@ -17,7 +17,7 @@ class App extends React.Component {
       blackPieces: 12,
       whitePieces: 12,
       nexMoveInAnyDirection: false,
-      showMenu: false
+      showMenu: false,
     };
   }
 
@@ -32,22 +32,16 @@ class App extends React.Component {
         <PiecesCounterBar blackPieces={blackPieces} whitePieces={whitePieces} />
         <div className="bar">
           <Button
-            className="menu-button"
-            color="primary"
+            variant="primary"
             onClick={() => appActions.showMenu(this, true)}
-            size="small"
           >
-            <MenuIcon size="small" />
+            <List size="50" />
           </Button>
           <div className="whoPlay">{whoPlay} plays</div>
         </div>
-        <Table table={table} onClick={evt => appActions.onClick(this, evt)} />
+        <Table table={table} onClick={(evt) => appActions.onClick(this, evt)} />
         <div className="buttons">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => appActions.restart(this)}
-          >
+          <Button variant="primary" onClick={() => appActions.restart(this)}>
             Restart Game
           </Button>
         </div>
